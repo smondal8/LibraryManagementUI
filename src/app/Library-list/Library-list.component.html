@@ -1,0 +1,10 @@
+    <h2><u>Library details</u></h2>
+    <H1>{{errorMsg}}</H1>
+    <table border="2" width="50%">  
+    <tr><th width="20%">Library Code</th><th width="80%" colspan = "2">Library Name</th></tr>
+    <tr *ngFor="let library of LibraryLists">
+    <td width="20%">{{library.id}}</td><td width="70%">{{library.name}}</td>
+    <td width="10%"><button (click)="onClick(library)">Details</button></td>      
+    </tr>  
+    </table>
+    

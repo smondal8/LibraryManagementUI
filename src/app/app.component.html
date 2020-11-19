@@ -1,0 +1,15 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <p>
+    Registration Books : <button (click)="onClick()">Register</button>
+  </p>
+</div>
+<div *ngIf="authGuardStatus; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><library-list></library-list></ng-template>
+<ng-template #elseBlock></ng-template>
+<router-outlet></router-outlet>
+
+
