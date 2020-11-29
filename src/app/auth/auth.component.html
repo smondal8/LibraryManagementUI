@@ -5,21 +5,22 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" #authForm="ngForm" (ngSubmit)="onSubmit(authForm.value)">
+            <form class="form-signin" #f="ngForm" (ngSubmit)="onSubmit(f)">
               <div class="form-label-group">
-                <input type="username" id="username" class="form-control" placeholder="User Name" required autofocus>
+                <input type="text" id="username" name="username" class="form-control" placeholder="User Name" ngModel required autofocus>
                 <label for="inputEmail">User Name</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" ngModel required>
                 <label for="inputPassword">Password</label>
               </div>
 
               <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" name="checkbox" ngModel>
                 <label class="custom-control-label" for="customCheck1">Remember password</label>
               </div>
+              <div class="bg-danger text-white">{{errorMsg}}</div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
               <hr class="my-4">
             </form>

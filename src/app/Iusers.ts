@@ -1,4 +1,4 @@
 export interface Iusers {
-    username : number,
+    username : string,
 	password : string
 }

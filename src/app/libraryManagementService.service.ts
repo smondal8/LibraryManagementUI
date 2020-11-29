@@ -12,14 +12,21 @@ import { catchError } from 'rxjs/operators';
 })
 export class getLibrarydetailsService {
   public httpClient : HttpClient;
-  private url : string = "http://localhost:8282/library/listAll";  
+  private url : string = "http://localhost:8282/library/listAll";
+  private authorizationHeader : string;  
   
   constructor(httpClient : HttpClient) {
     this.httpClient = httpClient;
    }
 
-public getLibraryDetails() : Observable<ILibrary[]>{    
-    return this.httpClient.get<ILibrary[]>(this.url).pipe(      
+public getLibraryDetails() : Observable<ILibrary[]>{
+    this.authorizationHeader = localStorage.getItem("token");
+    let httpHeaders = new HttpHeaders().set('Authorization', "Bearer "+this.authorizationHeader);
+    console.log(this.authorizationHeader);
+    let options = {
+      headers: httpHeaders
+    };    
+    return this.httpClient.get<ILibrary[]>(this.url,options).pipe(      
       catchError((error: HttpErrorResponse) =>{       
         return throwError(error.message || 'server error');    
                                             })
