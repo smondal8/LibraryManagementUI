@@ -5,6 +5,7 @@ import { AuthServiceService } from './auth-service.service';
 import { Router, CanActivate } from '@angular/router';
 import { timeInterval } from 'rxjs/operators';
 import { timer } from 'rxjs';
+import { AuthGuard } from './authGuard';
 
 @Component({
   selector: 'app-auth',
@@ -17,13 +18,17 @@ export class AuthComponent implements OnInit {
   token : string;
   errorMsg : string;
   router : Router;
+  authGuard : AuthGuard;
+  isLoggedIn : Boolean;
 
-  constructor(authService : AuthServiceService,router : Router) { 
+  constructor(authService : AuthServiceService,router : Router,authGuard : AuthGuard) { 
     this.authService = authService;
     this.router = router;
+    this.authGuard = authGuard;
   }
   
   ngOnInit(): void {
+    this.isLoggedIn = this.authGuard.canActivate();
   }
   private delay(ms: number)
   {
@@ -36,10 +41,9 @@ export class AuthComponent implements OnInit {
     this.authService.authenticate(this.user).subscribe(token => 
       {
         this.token = token;
-        console.log("Error is :" + this.errorMsg);
-        localStorage.setItem("token",this.token);   
-        localStorage.setItem("user",this.user.username); 
-        console.log(this.token);
+        localStorage.setItem("token",JSON.stringify(this.token));   
+        localStorage.setItem("user",JSON.stringify(this.user.username)); 
+        console.log(localStorage.getItem("token"));
         this.router.navigate(['']);
       },
       error => {

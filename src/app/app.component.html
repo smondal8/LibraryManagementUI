@@ -6,6 +6,7 @@
     Registration Books : <button (click)="onClick()">Register</button>
   </p>
 </div>
+<p>Here is the value : {{authGuardStatus}}</p>
 <div *ngIf="authGuardStatus; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock><library-list></library-list></ng-template>
 <ng-template #elseBlock></ng-template>

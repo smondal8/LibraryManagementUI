@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 export class getLibrarydetailsService {
   public httpClient : HttpClient;
   private url : string = "http://localhost:8282/library/listAll";
-  private authorizationHeader : string;  
+  private authorizationHeader : String;  
   
   constructor(httpClient : HttpClient) {
     this.httpClient = httpClient;
@@ -22,7 +22,7 @@ export class getLibrarydetailsService {
 public getLibraryDetails() : Observable<ILibrary[]>{
     this.authorizationHeader = localStorage.getItem("token");
     let httpHeaders = new HttpHeaders().set('Authorization', "Bearer "+this.authorizationHeader);
-    console.log(this.authorizationHeader);
+    console.log("Authorization header"+this.authorizationHeader);
     let options = {
       headers: httpHeaders
     };    

@@ -7,7 +7,7 @@ import { AuthGuard } from './auth/authGuard';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full',redirectTo: 'login'},
+  //{path: '', pathMatch: 'full',redirectTo: 'login'},
   {path: 'login',component: AuthComponent},
   {path: 'library', canActivate: [AuthGuard], component: RegistrationBookComponent},
   {path: 'books-details/:id', canActivate: [AuthGuard],component: BookDetailsComponent}

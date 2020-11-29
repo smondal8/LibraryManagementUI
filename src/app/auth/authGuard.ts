@@ -5,7 +5,7 @@ export class AuthGuard implements CanActivate {
     base_url: string;
     constructor(private router: Router) {}
     canActivate() {
-        if(localStorage.getItem("token") === null){
+        if(localStorage.getItem("token") !== null){
             return true;
         }
         this.router.navigate(['/login']);

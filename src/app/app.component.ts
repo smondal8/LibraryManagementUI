@@ -17,10 +17,14 @@ export class AppComponent {
   }  
   title = 'Library Management System';
   authGuardStatus : Boolean;
+  
   onClick(){
     this.router.navigate(["/library"]);
   }
   ngOnInit(): void {
     this.authGuardStatus = this.authGuard.canActivate();
+    if(this.authGuardStatus===null){
+      this.router.navigate(["/login"]);
+    }
   }
 }
