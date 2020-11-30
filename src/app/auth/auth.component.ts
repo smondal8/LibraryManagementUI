@@ -6,6 +6,7 @@ import { Router, CanActivate } from '@angular/router';
 import { timeInterval } from 'rxjs/operators';
 import { timer } from 'rxjs';
 import { AuthGuard } from './authGuard';
+import { ITokenizer } from '../ITokenizer';
 
 @Component({
   selector: 'app-auth',
@@ -20,7 +21,8 @@ export class AuthComponent implements OnInit {
   router : Router;
   authGuard : AuthGuard;
   isLoggedIn : Boolean;
-
+  tokenObj : ITokenizer;
+  
   constructor(authService : AuthServiceService,router : Router,authGuard : AuthGuard) { 
     this.authService = authService;
     this.router = router;
@@ -41,9 +43,10 @@ export class AuthComponent implements OnInit {
     this.authService.authenticate(this.user).subscribe(token => 
       {
         this.token = token;
-        localStorage.setItem("token",JSON.stringify(this.token));   
-        localStorage.setItem("user",JSON.stringify(this.user.username)); 
-        console.log(localStorage.getItem("token"));
+        localStorage.setItem("token",JSON.stringify(token));   
+        localStorage.setItem("user",JSON.stringify(this.user.username));
+        this.tokenObj = JSON.parse(localStorage.getItem("token"));                      
+        console.log(this.tokenObj.token);
         this.router.navigate(['']);
       },
       error => {

@@ -27,4 +27,9 @@ export class AppComponent {
       this.router.navigate(["/login"]);
     }
   }
+  onLogout(): void {
+    console.log("Clearing logs!");
+    localStorage.clear();
+    this.router.navigate(["/login"]);
+  }
 }

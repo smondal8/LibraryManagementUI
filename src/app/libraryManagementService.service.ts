@@ -5,6 +5,7 @@ import { IBook } from './IBook';
 import { HttpHeaders } from '@angular/common/http';
 import { ILibrary } from './ILibrary';
 import { catchError } from 'rxjs/operators';
+import { ITokenizer } from './ITokenizer';
  
 
 @Injectable({
@@ -14,15 +15,18 @@ export class getLibrarydetailsService {
   public httpClient : HttpClient;
   private url : string = "http://localhost:8282/library/listAll";
   private authorizationHeader : String;  
-  
+  private tokenObj : ITokenizer;
   constructor(httpClient : HttpClient) {
     this.httpClient = httpClient;
    }
 
 public getLibraryDetails() : Observable<ILibrary[]>{
-    this.authorizationHeader = localStorage.getItem("token");
-    let httpHeaders = new HttpHeaders().set('Authorization', "Bearer "+this.authorizationHeader);
-    console.log("Authorization header"+this.authorizationHeader);
+    this.tokenObj = JSON.parse(localStorage.getItem("token"));                      
+    this.authorizationHeader = this.tokenObj.token;
+    let httpHeaders = new HttpHeaders().set('authorization', "Bearer "+this.authorizationHeader);
+    httpHeaders.set('Content-Type',"application/json");
+    //console.log("Authorization header "+this.authorizationHeader);
+    //console.log(httpHeaders);
     let options = {
       headers: httpHeaders
     };    
